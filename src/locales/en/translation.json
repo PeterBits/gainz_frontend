@@ -60,6 +60,16 @@
       "lowercase": "At least one lowercase letter (a-z)",
       "number": "At least one number (0-9)"
     },
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameTooLong": "Name is too long",
+      "emailInvalid": "Invalid email address",
+      "passwordMin": "Password must be at least 6 characters",
+      "passwordMax": "Password must be less than 128 characters",
+      "passwordUppercase": "Password must contain at least one uppercase letter",
+      "passwordLowercase": "Password must contain at least one lowercase letter",
+      "passwordNumber": "Password must contain at least one number"
+    },
     "role": "I am a...",
     "roleAthlete": "Athlete - Track my own workouts",
     "roleTrainer": "Trainer - Create routines for athletes",

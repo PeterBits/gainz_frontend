@@ -60,6 +60,16 @@
       "lowercase": "Al menos una letra minúscula (a-z)",
       "number": "Al menos un número (0-9)"
     },
+    "errors": {
+      "nameRequired": "El nombre es obligatorio",
+      "nameTooLong": "El nombre es demasiado largo",
+      "emailInvalid": "Correo electrónico inválido",
+      "passwordMin": "La contraseña debe tener al menos 6 caracteres",
+      "passwordMax": "La contraseña debe tener menos de 128 caracteres",
+      "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",
+      "passwordLowercase": "La contraseña debe contener al menos una letra minúscula",
+      "passwordNumber": "La contraseña debe contener al menos un número"
+    },
     "role": "Soy...",
     "roleAthlete": "Atleta - Registrar mis propios entrenamientos",
     "roleTrainer": "Entrenador - Crear rutinas para atletas",

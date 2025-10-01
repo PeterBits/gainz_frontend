@@ -6,7 +6,7 @@ import { useThemeStore } from '@/stores/themeStore';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { Home } from '@/pages/Home';
 import { Login } from '@/pages/Login';
-import { Register } from '@/pages/Register';
+import { Register } from '@/pages/register';
 import { Dashboard } from '@/pages/Dashboard';
 
 const queryClient = new QueryClient({
