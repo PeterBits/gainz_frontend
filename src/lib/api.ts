@@ -43,8 +43,8 @@ api.interceptors.response.use(
   (error) => {
     // Only redirect to login for 401 errors on protected routes
     // Don't redirect if the error is from login/register endpoints
-    const isAuthEndpoint = error.config?.url?.includes('/auth/login') ||
-                          error.config?.url?.includes('/auth/register');
+    const isAuthEndpoint =
+      error.config?.url?.includes('/auth/login') || error.config?.url?.includes('/auth/register');
 
     if (error.response?.status === 401 && !isAuthEndpoint) {
       // Token expired or invalid
@@ -58,17 +58,13 @@ api.interceptors.response.use(
 
 // Auth endpoints
 export const authApi = {
-  register: (data: RegisterRequest) =>
-    api.post<RegisterResponse>('/auth/register', data),
+  register: (data: RegisterRequest) => api.post<RegisterResponse>('/auth/register', data),
 
-  login: (credentials: LoginRequest) =>
-    api.post<LoginResponse>('/auth/login', credentials),
+  login: (credentials: LoginRequest) => api.post<LoginResponse>('/auth/login', credentials),
 
-  getProfile: () =>
-    api.get<User>('/auth/profile'),
+  getProfile: () => api.get<User>('/auth/profile'),
 
-  updateProfile: (data: Partial<User>) =>
-    api.put<User>('/auth/profile', data),
+  updateProfile: (data: Partial<User>) => api.put<User>('/auth/profile', data),
 
   changePassword: (currentPassword: string, newPassword: string) =>
     api.post('/auth/change-password', { currentPassword, newPassword }),
@@ -76,52 +72,39 @@ export const authApi = {
 
 // Routines endpoints
 export const routinesApi = {
-  getAll: () =>
-    api.get<Routine[]>('/routines'),
+  getAll: () => api.get<Routine[]>('/routines'),
 
-  getById: (id: number) =>
-    api.get<Routine>(`/routines/${id}`),
+  getById: (id: number) => api.get<Routine>(`/routines/${id}`),
 
-  create: (data: CreateRoutineRequest) =>
-    api.post<Routine>('/routines', data),
+  create: (data: CreateRoutineRequest) => api.post<Routine>('/routines', data),
 
-  update: (id: number, data: UpdateRoutineRequest) =>
-    api.put<Routine>(`/routines/${id}`, data),
+  update: (id: number, data: UpdateRoutineRequest) => api.put<Routine>(`/routines/${id}`, data),
 
-  delete: (id: number) =>
-    api.delete(`/routines/${id}`),
+  delete: (id: number) => api.delete(`/routines/${id}`),
 
-  getStats: () =>
-    api.get('/routines/stats'),
+  getStats: () => api.get('/routines/stats'),
 
   // Trainer endpoints
   assignRoutine: (routineId: number, athleteId: number) =>
     api.post('/routines/assign', { routineId, athleteId }),
 
-  getAthletes: () =>
-    api.get('/routines/athletes'),
+  getAthletes: () => api.get('/routines/athletes'),
 
-  addAthlete: (athleteEmail: string) =>
-    api.post('/routines/athletes', { athleteEmail }),
+  addAthlete: (athleteEmail: string) => api.post('/routines/athletes', { athleteEmail }),
 
-  removeAthlete: (athleteId: number) =>
-    api.delete(`/routines/athletes/${athleteId}`),
+  removeAthlete: (athleteId: number) => api.delete(`/routines/athletes/${athleteId}`),
 
   // Athlete endpoints
-  getTrainers: () =>
-    api.get('/routines/trainers'),
+  getTrainers: () => api.get('/routines/trainers'),
 };
 
 // Exercises endpoints
 export const exercisesApi = {
-  getAll: () =>
-    api.get<Exercise[]>('/exercises'),
+  getAll: () => api.get<Exercise[]>('/exercises'),
 
-  getById: (id: number) =>
-    api.get<Exercise>(`/exercises/${id}`),
+  getById: (id: number) => api.get<Exercise>(`/exercises/${id}`),
 
-  create: (data: { name: string; description?: string }) =>
-    api.post<Exercise>('/exercises', data),
+  create: (data: { name: string; description?: string }) => api.post<Exercise>('/exercises', data),
 };
 
 // Progress/Sessions endpoints
@@ -129,8 +112,7 @@ export const progressApi = {
   getSessions: (params?: GetSessionsParams) =>
     api.get<WorkoutSession[]>('/progress/sessions', { params }),
 
-  getSessionById: (id: number) =>
-    api.get<WorkoutSession>(`/progress/sessions/${id}`),
+  getSessionById: (id: number) => api.get<WorkoutSession>(`/progress/sessions/${id}`),
 
   createSession: (data: CreateSessionRequest) =>
     api.post<WorkoutSession>('/progress/sessions', data),
@@ -138,29 +120,22 @@ export const progressApi = {
   updateSession: (id: number, data: UpdateSessionRequest) =>
     api.put<WorkoutSession>(`/progress/sessions/${id}`, data),
 
-  deleteSession: (id: number) =>
-    api.delete(`/progress/sessions/${id}`),
+  deleteSession: (id: number) => api.delete(`/progress/sessions/${id}`),
 
   getStats: (params?: { startDate?: string; endDate?: string }) =>
     api.get('/progress/stats', { params }),
 
-  getExerciseProgress: (
-    exerciseId: number,
-    params?: GetExerciseProgressParams
-  ) =>
+  getExerciseProgress: (exerciseId: number, params?: GetExerciseProgressParams) =>
     api.get(`/progress/exercises/${exerciseId}`, { params }),
 };
 
 // User Metrics endpoints
 export const metricsApi = {
-  get: () =>
-    api.get<UserMetrics>('/metrics'),
+  get: () => api.get<UserMetrics>('/metrics'),
 
-  update: (data: UpdateMetricsRequest) =>
-    api.put<UserMetrics>('/metrics', data),
+  update: (data: UpdateMetricsRequest) => api.put<UserMetrics>('/metrics', data),
 
-  delete: () =>
-    api.delete('/metrics'),
+  delete: () => api.delete('/metrics'),
 };
 
 export default api;

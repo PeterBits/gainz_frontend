@@ -23,9 +23,7 @@ export function Dashboard() {
                 <Dumbbell className="w-8 h-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                  Gainz
-                </h1>
+                <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Gainz</h1>
                 <p className="text-slate-600 dark:text-slate-400">
                   Welcome back, {user?.name || 'Athlete'}!
                 </p>
@@ -54,12 +52,8 @@ export function Dashboard() {
                 <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Workouts This Week
-                </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                  0
-                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Workouts This Week</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
               </div>
             </div>
           </div>
@@ -70,12 +64,8 @@ export function Dashboard() {
                 <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Active Routines
-                </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                  0
-                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Active Routines</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
               </div>
             </div>
           </div>
@@ -86,12 +76,8 @@ export function Dashboard() {
                 <User className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Total Exercises
-                </p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                  0
-                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Total Exercises</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">0</p>
               </div>
             </div>
           </div>
@@ -128,8 +114,8 @@ export function Dashboard() {
             Welcome to Gainz!
           </h3>
           <p className="text-slate-700 dark:text-slate-300">
-            Your gym routine tracking app is ready. Start by creating your first
-            routine or logging a workout session.
+            Your gym routine tracking app is ready. Start by creating your first routine or logging
+            a workout session.
           </p>
         </div>
       </div>

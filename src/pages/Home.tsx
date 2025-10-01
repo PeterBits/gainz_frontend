@@ -15,19 +15,11 @@ export function Home() {
         </div>
 
         <div className="space-y-4">
-          <h1 className="text-5xl font-bold text-slate-900 dark:text-slate-100">
-            Gainz
-          </h1>
-          <p className="text-xl text-slate-600 dark:text-slate-400">
-            Track your fitness journey
-          </p>
+          <h1 className="text-5xl font-bold text-slate-900 dark:text-slate-100">Gainz</h1>
+          <p className="text-xl text-slate-600 dark:text-slate-400">Track your fitness journey</p>
         </div>
 
-        <Button
-          onClick={() => navigate('/login')}
-          size="lg"
-          className="text-lg px-8 py-6"
-        >
+        <Button onClick={() => navigate('/login')} size="lg" className="text-lg px-8 py-6">
           Get Started
         </Button>
       </div>

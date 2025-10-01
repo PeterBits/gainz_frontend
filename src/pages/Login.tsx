@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuthStore } from "@/stores/authStore";
-import { authApi } from "@/lib/api";
-import { Button } from "@/components/ui/button";
-import { Dumbbell, ArrowLeft } from "lucide-react";
-import type { LoginRequest } from "@/types/api";
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuthStore } from '@/stores/authStore';
+import { authApi } from '@/lib/api';
+import { Button } from '@/components/ui/button';
+import { Dumbbell, ArrowLeft } from 'lucide-react';
+import type { LoginRequest } from '@/types/api';
 
 export function Login() {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
 
   const [formData, setFormData] = useState<LoginRequest>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const onChangeData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,18 +25,16 @@ export function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setLoading(true);
 
     try {
       const response = await authApi.login(formData);
       setAuth(response.data.user, response.data.token);
-      navigate("/dashboard", { replace: true });
+      navigate('/dashboard', { replace: true });
     } catch (err) {
       const error = err as { response?: { data?: { message?: string } } };
-      setError(
-        error.response?.data?.message || "Login failed. Please try again."
-      );
+      setError(error.response?.data?.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -46,7 +44,7 @@ export function Login() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Back to Home Button */}
-        <Button variant="ghost" onClick={() => navigate("/")} className="mb-4">
+        <Button variant="ghost" onClick={() => navigate('/')} className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Button>
@@ -116,17 +114,14 @@ export function Login() {
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
 
           {/* Register Link */}
           <p className="text-center mt-6 text-slate-600 dark:text-slate-400">
-            Don't have an account?{" "}
-            <Link
-              to="/register"
-              className="text-primary hover:underline font-medium"
-            >
+            Don't have an account?{' '}
+            <Link to="/register" className="text-primary hover:underline font-medium">
               Sign up
             </Link>
           </p>
