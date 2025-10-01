@@ -4,14 +4,24 @@ import { useAuthStore } from "@/stores/authStore";
 import { authApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Dumbbell, ArrowLeft } from "lucide-react";
+import type { LoginRequest } from "@/types/api";
 
 export function Login() {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState<LoginRequest>({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const onChangeData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +29,7 @@ export function Login() {
     setLoading(true);
 
     try {
-      const response = await authApi.login({ email, password });
+      const response = await authApi.login(formData);
       setAuth(response.data.user, response.data.token);
       navigate("/dashboard", { replace: true });
     } catch (err) {
@@ -76,8 +86,9 @@ export function Login() {
               <input
                 id="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={formData.email}
+                onChange={onChangeData}
                 required
                 className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                 placeholder="you@example.com"
@@ -94,8 +105,9 @@ export function Login() {
               <input
                 id="password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={formData.password}
+                onChange={onChangeData}
                 required
                 minLength={6}
                 className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"

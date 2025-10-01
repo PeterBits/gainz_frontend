@@ -1,24 +1,26 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuthStore } from '@/stores/authStore';
-import { authApi } from '@/lib/api';
-import { Button } from '@/components/ui/button';
-import { Dumbbell, ArrowLeft } from 'lucide-react';
-import type { UserRole } from '@/types/entities';
+import { Button } from "@/components/ui/button";
+import { authApi } from "@/lib/api";
+import { useAuthStore } from "@/stores/authStore";
+import type { RegisterRequest } from "@/types/api";
+import { ArrowLeft, Dumbbell } from "lucide-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Register() {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: '',
-    role: 'ATHLETE' as UserRole,
+  const [formData, setFormData] = useState<RegisterRequest>({
+    email: "",
+    password: "",
+    name: "",
+    role: "ATHLETE",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -27,27 +29,29 @@ export function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
       const response = await authApi.register(formData);
       setAuth(response.data.user, response.data.token);
-      navigate('/dashboard', { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       const error = err as {
         response?: {
           data?: {
             message?: string;
-            details?: Array<{ msg: string }>
-          }
-        }
+            details?: Array<{ msg: string }>;
+          };
+        };
       };
-      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
+      const errorMessage =
+        error.response?.data?.message ||
+        "Registration failed. Please try again.";
       const errorDetails = error.response?.data?.details;
 
       if (errorDetails && Array.isArray(errorDetails)) {
-        setError(errorDetails.map((d) => d.msg).join(', '));
+        setError(errorDetails.map((d) => d.msg).join(", "));
       } else {
         setError(errorMessage);
       }
@@ -60,11 +64,7 @@ export function Register() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
         {/* Back to Home Button */}
-        <Button
-          variant="ghost"
-          onClick={() => navigate('/')}
-          className="mb-4"
-        >
+        <Button variant="ghost" onClick={() => navigate("/")} className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Button>
@@ -180,13 +180,13 @@ export function Register() {
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Creating account...' : 'Create Account'}
+              {loading ? "Creating account..." : "Create Account"}
             </Button>
           </form>
 
           {/* Login Link */}
           <p className="text-center mt-6 text-slate-600 dark:text-slate-400">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <Link
               to="/login"
               className="text-primary hover:underline font-medium"
