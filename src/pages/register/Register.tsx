@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { ArrowLeft, Dumbbell, Mail, Lock, User, UserCircle, Check, X } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
@@ -31,13 +31,15 @@ function Register() {
   const [responseError, setResponseError] = useState('');
   const [showPasswordValidation, setShowPasswordValidation] = useState(false);
 
+  const schema = useMemo(() => registerValidationSchema(t), [t]);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerValidationSchema(t)),
+    resolver: zodResolver(schema),
     defaultValues: {
       name: '',
       email: '',

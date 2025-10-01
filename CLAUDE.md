@@ -139,9 +139,49 @@ src/
 - Vite dev server proxies `/api` requests to backend
 
 **State Management**:
-- **Local state**: React Hook Form for forms
+- **Local state**: React `useState` for UI state
+- **Form state**: React Hook Form with Zod validation
 - **Auth state**: Zustand with localStorage persistence
 - **Server state**: TanStack Query for API data (retry: 1, no window refocus)
+
+**Form Validation**:
+- Use **React Hook Form** + **Zod** for all forms
+- Create Zod schemas with translated error messages using `useTranslation()`
+- Use `useMemo` to create schemas inside components for i18n support:
+  ```tsx
+  import { useForm } from 'react-hook-form';
+  import { zodResolver } from '@hookform/resolvers/zod';
+  import { z } from 'zod';
+  import { useMemo } from 'react';
+  import { useTranslation } from 'react-i18next';
+
+  function MyForm() {
+    const { t } = useTranslation();
+
+    const schema = useMemo(() => z.object({
+      email: z.string().email(t('errors.emailInvalid')),
+      password: z.string().min(6, t('errors.passwordMin'))
+    }), [t]);
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+      resolver: zodResolver(schema)
+    });
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input {...register('email')} />
+        {errors.email && <p>{errors.email.message}</p>}
+      </form>
+    );
+  }
+  ```
+- **Always** add error messages to translation files (EN/ES)
+- Use red borders and error text below fields for validation feedback
+- Backend validation requirements (for password):
+  - 6-128 characters
+  - At least one uppercase letter (A-Z)
+  - At least one lowercase letter (a-z)
+  - At least one number (0-9)
 
 **User Roles**:
 - `ATHLETE`: Can track workouts, view assigned routines from trainers
