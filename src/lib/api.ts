@@ -39,7 +39,12 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    // Only redirect to login for 401 errors on protected routes
+    // Don't redirect if the error is from login/register endpoints
+    const isAuthEndpoint = error.config?.url?.includes('/auth/login') ||
+                          error.config?.url?.includes('/auth/register');
+
+    if (error.response?.status === 401 && !isAuthEndpoint) {
       // Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');

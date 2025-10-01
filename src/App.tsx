@@ -4,6 +4,8 @@ import { useAuthStore } from '@/stores/authStore';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { Home } from '@/pages/Home';
 import { Login } from '@/pages/Login';
+import { Register } from '@/pages/Register';
+import { Dashboard } from '@/pages/Dashboard';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,19 +24,26 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={
-              isAuthenticated ? <Navigate to="/" replace /> : <Login />
+              isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              isAuthenticated ? <Navigate to="/dashboard" replace /> : <Register />
             }
           />
 
           {/* Protected routes */}
           <Route
-            path="/"
+            path="/dashboard"
             element={
               <ProtectedRoute>
-                <Home />
+                <Dashboard />
               </ProtectedRoute>
             }
           />
