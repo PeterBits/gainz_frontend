@@ -1,4 +1,4 @@
-import type { SessionExercise,WorkoutSession } from '../entities/session';
+import type { SessionExercise, WorkoutSession } from '../entities/session';
 
 // Get Sessions
 export interface GetSessionsParams {

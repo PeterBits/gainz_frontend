@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '@/stores/authStore';
 
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { LanguageSwitcher } from './languageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 import { Button } from './ui/button';
 

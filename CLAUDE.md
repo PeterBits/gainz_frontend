@@ -117,9 +117,12 @@ src/
 ├── components/       # Shared components (used in multiple pages ONLY)
 │   ├── auth/        # Authentication components (ProtectedRoute)
 │   ├── ui/          # Reusable UI components (shadcn/ui style)
+│   ├── languageSwitcher/  # Language switcher module
+│   │   ├── flags/   # Flag SVG components (USFlag, ESFlag)
+│   │   ├── LanguageSwitcher.tsx
+│   │   └── index.tsx # Export component
 │   ├── BottomNav.tsx # Mobile navigation
 │   ├── Header.tsx   # Global header
-│   ├── LanguageSwitcher.tsx  # Language toggle
 │   └── ThemeToggle.tsx # Dark mode toggle
 ├── hooks/           # Shared hooks (used in multiple pages ONLY)
 │   ├── useExercises.ts # Fetch exercises (used in multiple pages)
@@ -138,7 +141,8 @@ src/
 │   │   └── index.tsx # Export: export { default as Login } from './Login'
 │   ├── register/    # Register page module
 │   │   ├── hooks/   # Register-specific hooks
-│   │   │   └── useRegister.ts
+│   │   │   ├── useRegister.ts
+│   │   │   └── index.ts # Export hooks
 │   │   ├── Register.tsx
 │   │   ├── validationsSchema.ts # Register-specific validation
 │   │   └── index.tsx # Export: export { default as Register } from './Register'
@@ -176,7 +180,7 @@ Only place code in shared directories when it's used in **multiple pages**:
 
 **3. Index Files for Clean Imports**
 
-**IMPORTANT**: Every page directory **must** have an `index.tsx` file that exports the page component:
+**IMPORTANT**: Every page directory and component subdirectory **must** have an `index.tsx` (or `index.ts` for non-JSX) file that exports its main content:
 
 ```tsx
 // src/pages/login/index.tsx
@@ -184,12 +188,25 @@ export { default as Login } from './Login';
 
 // src/pages/register/index.tsx
 export { default as Register } from './Register';
+
+// src/pages/register/hooks/index.ts
+export { default as useRegister } from './useRegister';
+
+// src/components/languageSwitcher/index.tsx
+export { LanguageSwitcher } from './LanguageSwitcher';
 ```
 
-This allows clean imports in `App.tsx`:
+This allows clean imports throughout the app:
 ```tsx
+// In App.tsx
 import { Login } from '@/pages/login';
 import { Register } from '@/pages/register';
+
+// In Register.tsx
+import { useRegister } from './hooks';
+
+// In any page
+import { LanguageSwitcher } from '@/components/languageSwitcher';
 ```
 
 **4. Benefits of This Architecture**

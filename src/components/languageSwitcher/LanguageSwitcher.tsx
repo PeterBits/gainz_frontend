@@ -1,9 +1,8 @@
 import { ChevronDown } from 'lucide-react';
-import { useEffect,useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ESFlag } from './flags/ESFlag';
-import { USFlag } from './flags/USFlag';
+import { ESFlag, USFlag } from './flags';
 
 const languages = [
   {
@@ -18,7 +17,7 @@ const languages = [
   },
 ];
 
-export function LanguageSwitcher() {
+function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -85,3 +84,5 @@ export function LanguageSwitcher() {
     </div>
   );
 }
+
+export default LanguageSwitcher;
