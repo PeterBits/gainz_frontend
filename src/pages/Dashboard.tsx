@@ -2,7 +2,16 @@ import { useAuthStore } from '@/stores/authStore';
 import { Button } from '@/components/ui/button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { Dumbbell, TrendingUp, Calendar, User, LogOut, Activity, Target, Award } from 'lucide-react';
+import {
+  Dumbbell,
+  TrendingUp,
+  Calendar,
+  User,
+  LogOut,
+  Activity,
+  Target,
+  Award,
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -44,10 +53,26 @@ export function Dashboard() {
   ];
 
   const quickActions = [
-    { icon: <Dumbbell className="w-5 h-5" />, label: t('dashboard.quickActions.startWorkout'), color: 'from-blue-500 to-blue-600' },
-    { icon: <Calendar className="w-5 h-5" />, label: t('dashboard.quickActions.viewRoutines'), color: 'from-green-500 to-green-600' },
-    { icon: <TrendingUp className="w-5 h-5" />, label: t('dashboard.quickActions.trackProgress'), color: 'from-purple-500 to-purple-600' },
-    { icon: <Target className="w-5 h-5" />, label: t('dashboard.quickActions.setGoals'), color: 'from-orange-500 to-orange-600' },
+    {
+      icon: <Dumbbell className="w-5 h-5" />,
+      label: t('dashboard.quickActions.startWorkout'),
+      color: 'from-blue-500 to-blue-600',
+    },
+    {
+      icon: <Calendar className="w-5 h-5" />,
+      label: t('dashboard.quickActions.viewRoutines'),
+      color: 'from-green-500 to-green-600',
+    },
+    {
+      icon: <TrendingUp className="w-5 h-5" />,
+      label: t('dashboard.quickActions.trackProgress'),
+      color: 'from-purple-500 to-purple-600',
+    },
+    {
+      icon: <Target className="w-5 h-5" />,
+      label: t('dashboard.quickActions.setGoals'),
+      color: 'from-orange-500 to-orange-600',
+    },
   ];
 
   return (
@@ -72,7 +97,9 @@ export function Dashboard() {
               <LanguageSwitcher />
               <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
                 <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{user?.role}</span>
+                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  {user?.role}
+                </span>
               </div>
               <Button
                 variant="outline"
@@ -99,7 +126,9 @@ export function Dashboard() {
                 className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 ${stat.bgColor} rounded-xl flex items-center justify-center ${stat.textColor}`}>
+                  <div
+                    className={`w-12 h-12 ${stat.bgColor} rounded-xl flex items-center justify-center ${stat.textColor}`}
+                  >
                     {stat.icon}
                   </div>
                   <Award className="w-5 h-5 text-slate-300" />
@@ -125,7 +154,9 @@ export function Dashboard() {
                   key={index}
                   className="group relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-600 hover:from-white hover:to-slate-50 dark:hover:from-slate-600 dark:hover:to-slate-500 border border-slate-200 dark:border-slate-600 rounded-xl p-6 transition-all hover:shadow-md hover:scale-105 active:scale-95"
                 >
-                  <div className={`w-10 h-10 bg-gradient-to-r ${action.color} rounded-lg flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform`}>
+                  <div
+                    className={`w-10 h-10 bg-gradient-to-r ${action.color} rounded-lg flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform`}
+                  >
                     {action.icon}
                   </div>
                   <p className="font-medium text-slate-900 dark:text-slate-100">{action.label}</p>
@@ -147,11 +178,10 @@ export function Dashboard() {
                     ? t('dashboard.cta.subtitleTrainer')
                     : t('dashboard.cta.subtitleAthlete')}
                 </p>
-                <Button
-                  variant="secondary"
-                  className="bg-white text-blue-600 hover:bg-blue-50"
-                >
-                  {user?.role === 'TRAINER' ? t('dashboard.cta.buttonTrainer') : t('dashboard.cta.buttonAthlete')}
+                <Button variant="secondary" className="bg-white text-blue-600 hover:bg-blue-50">
+                  {user?.role === 'TRAINER'
+                    ? t('dashboard.cta.buttonTrainer')
+                    : t('dashboard.cta.buttonAthlete')}
                 </Button>
               </div>
             </div>

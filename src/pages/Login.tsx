@@ -91,7 +91,10 @@ export function Login() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+              >
                 {t('login.email')}
               </label>
               <div className="relative">
@@ -110,7 +113,10 @@ export function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+              >
                 {t('login.password')}
               </label>
               <div className="relative">

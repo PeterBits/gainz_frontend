@@ -52,6 +52,14 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "passwordHint": "Debe tener al menos 6 caracteres",
+    "passwordMustContain": "La contraseña debe contener",
+    "passwordRequirements": "La contraseña no cumple con todos los requisitos",
+    "validation": {
+      "length": "6-128 caracteres",
+      "uppercase": "Al menos una letra mayúscula (A-Z)",
+      "lowercase": "Al menos una letra minúscula (a-z)",
+      "number": "Al menos un número (0-9)"
+    },
     "role": "Soy...",
     "roleAthlete": "Atleta - Registrar mis propios entrenamientos",
     "roleTrainer": "Entrenador - Crear rutinas para atletas",
