@@ -33,12 +33,20 @@ export function Register() {
       const response = await authApi.register(formData);
       setAuth(response.data.user, response.data.token);
       navigate('/dashboard', { replace: true });
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.message || 'Registration failed. Please try again.';
-      const errorDetails = err.response?.data?.details;
+    } catch (err) {
+      const error = err as {
+        response?: {
+          data?: {
+            message?: string;
+            details?: Array<{ msg: string }>
+          }
+        }
+      };
+      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
+      const errorDetails = error.response?.data?.details;
 
       if (errorDetails && Array.isArray(errorDetails)) {
-        setError(errorDetails.map((d: any) => d.msg).join(', '));
+        setError(errorDetails.map((d) => d.msg).join(', '));
       } else {
         setError(errorMessage);
       }

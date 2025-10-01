@@ -22,9 +22,10 @@ export function Login() {
       const response = await authApi.login({ email, password });
       setAuth(response.data.user, response.data.token);
       navigate("/dashboard", { replace: true });
-    } catch (err: any) {
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
       setError(
-        err.response?.data?.message || "Login failed. Please try again."
+        error.response?.data?.message || "Login failed. Please try again."
       );
     } finally {
       setLoading(false);
