@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/authStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import type { RegisterRequest } from '@/types/api';
 import { ArrowLeft, Dumbbell, Mail, Lock, User, UserCircle } from 'lucide-react';
 import { useState } from 'react';
@@ -61,10 +62,11 @@ export function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
         {/* Language Switcher */}
         <div className="flex justify-end mb-4">
+          <ThemeToggle />
           <LanguageSwitcher />
         </div>
 
@@ -72,14 +74,14 @@ export function Register() {
         <Button
           variant="ghost"
           onClick={() => navigate('/')}
-          className="mb-6 hover:bg-white/50"
+          className="mb-6 hover:bg-white/50 dark:hover:bg-slate-800/50 text-slate-900 dark:text-slate-100"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           {t('common.back')}
         </Button>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 md:p-10">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8 md:p-10">
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
@@ -89,8 +91,8 @@ export function Register() {
 
           {/* Title */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('register.title')}</h1>
-            <p className="text-slate-600">{t('register.subtitle')}</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">{t('register.title')}</h1>
+            <p className="text-slate-600 dark:text-slate-300">{t('register.subtitle')}</p>
           </div>
 
           {/* Error Message */}
@@ -195,10 +197,10 @@ export function Register() {
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200"></div>
+              <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-slate-500">{t('register.alreadyHaveAccount')}</span>
+              <span className="px-2 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400">{t('register.alreadyHaveAccount')}</span>
             </div>
           </div>
 
@@ -206,7 +208,7 @@ export function Register() {
           <div className="text-center">
             <Link
               to="/login"
-              className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+              className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium hover:underline"
             >
               {t('register.signInInstead')}
             </Link>

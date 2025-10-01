@@ -90,10 +90,10 @@ Configuration files:
 
 ### Tech Stack
 - **Frontend**: React 19 + TypeScript, Vite
-- **Styling**: TailwindCSS v4 with class-variance-authority (CVA)
+- **Styling**: TailwindCSS v4 with class-variance-authority (CVA) and dark mode
 - **Routing**: React Router v7
 - **State Management**:
-  - Zustand (auth state with persistence)
+  - Zustand (auth and theme state with persistence)
   - TanStack Query (server state)
 - **Forms**: React Hook Form + Zod validation
 - **HTTP Client**: Axios with interceptors
@@ -116,7 +116,7 @@ src/
 │   └── es/          # Spanish translations
 │       └── translation.json
 ├── pages/           # Route pages (Home, Login, Register, Dashboard)
-├── stores/          # Zustand stores (authStore with persist)
+├── stores/          # Zustand stores (authStore, themeStore with persist)
 ├── types/           # TypeScript type definitions
 │   ├── entities/    # Domain models
 │   └── api/         # API request/response types
@@ -170,6 +170,29 @@ src/
   ```
 - `LanguageSwitcher` component provides a toggle between languages
 - When adding new text, **always** add translations to both `en` and `es` translation files
+
+**Dark Mode**:
+- Implemented with Tailwind CSS v4 dark mode using custom `@variant` directive
+- Theme state managed with Zustand and persisted to localStorage
+- `ThemeToggle` component provides a toggle between light and dark modes
+- Theme is initialized on app load and applied to the `<html>` element
+- Dark mode configured in `src/index.css` with:
+  ```css
+  @variant dark (&:where(.dark, .dark *));
+  ```
+- Use Tailwind dark mode variants for styling:
+  ```tsx
+  <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
+    <p className="text-slate-600 dark:text-slate-300">Content</p>
+  </div>
+  ```
+- **Always** add dark mode variants when styling components
+- Common dark mode patterns:
+  - Backgrounds: `bg-white dark:bg-slate-800`
+  - Text: `text-slate-900 dark:text-slate-100`
+  - Borders: `border-slate-200 dark:border-slate-700`
+  - Secondary text: `text-slate-600 dark:text-slate-300`
+  - Gradients: `from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-800`
 
 **PWA Configuration**:
 - Auto-update service worker registration

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Dumbbell, TrendingUp, Users, Calendar, Zap } from 'lucide-react';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export function Home() {
   const navigate = useNavigate();
@@ -32,10 +33,11 @@ export function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Language Switcher */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      {/* Header Controls */}
       <div className="container mx-auto px-4 pt-4">
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-2">
+          <ThemeToggle />
           <LanguageSwitcher />
         </div>
       </div>
@@ -48,17 +50,17 @@ export function Home() {
             <div className="inline-flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-lg">
               <Dumbbell className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
               {t('home.title')}
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
               {t('home.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={() => navigate('/register')}
                 size="lg"
-                className="text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
+                className="text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all text-white"
               >
                 <Zap className="w-5 h-5 mr-2" />
                 {t('home.getStarted')}
@@ -67,7 +69,7 @@ export function Home() {
                 onClick={() => navigate('/login')}
                 variant="outline"
                 size="lg"
-                className="text-lg px-8 py-6 border-2 hover:bg-slate-50"
+                className="text-lg px-8 py-6 border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700"
               >
                 {t('home.signIn')}
               </Button>
@@ -79,17 +81,17 @@ export function Home() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all border border-slate-100 hover:border-blue-200"
+                className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-500"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center text-blue-600">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400">
                     {feature.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-2 text-slate-900">
+                    <h3 className="font-semibold text-lg mb-2 text-slate-900 dark:text-slate-100">
                       {feature.title}
                     </h3>
-                    <p className="text-slate-600">{feature.description}</p>
+                    <p className="text-slate-600 dark:text-slate-300">{feature.description}</p>
                   </div>
                 </div>
               </div>

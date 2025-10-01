@@ -45,19 +45,19 @@ export function LanguageSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-slate-200 hover:border-slate-300 transition-colors"
+        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500 transition-colors"
       >
         <CurrentFlag className="w-5 h-4 rounded-sm flex-shrink-0" />
-        <span className="text-sm font-medium text-slate-700">
+        <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
           {currentLanguage.code.toUpperCase()}
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50">
+        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-700 rounded-lg shadow-lg border border-slate-200 dark:border-slate-600 py-1 z-50">
           {languages.map((lang) => {
             const LangFlag = lang.Flag;
             const currentLang = i18n.language as 'en' | 'es';
@@ -65,16 +65,16 @@ export function LanguageSwitcher() {
               <button
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
-                className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-50 transition-colors ${
-                  lang.code === currentLanguage.code ? 'bg-blue-50' : ''
+                className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors ${
+                  lang.code === currentLanguage.code ? 'bg-blue-50 dark:bg-blue-900/30' : ''
                 }`}
               >
                 <LangFlag className="w-6 h-4 rounded-sm flex-shrink-0" />
-                <span className="text-sm font-medium text-slate-700">
+                <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
                   {lang.name[currentLang]}
                 </span>
                 {lang.code === currentLanguage.code && (
-                  <span className="ml-auto text-blue-600">✓</span>
+                  <span className="ml-auto text-blue-600 dark:text-blue-400">✓</span>
                 )}
               </button>
             );
