@@ -16,7 +16,26 @@ npm run dev              # Start dev server with Vite (default port 3000)
 npm run build            # Type-check with tsc and build for production
 npm run lint             # Lint code with ESLint
 npm run preview          # Preview production build locally
+npm run format           # Format code with Prettier
+npm run format:check     # Check code formatting
 ```
+
+## Code Style & Formatting
+
+**IMPORTANT**: This project uses Prettier for code formatting. Always respect these rules when writing or modifying code:
+
+- **Quotes**: Single quotes (`'`) for strings, not double quotes (`"`)
+- **Line Width**: Maximum 100 characters per line
+- **Indentation**: 2 spaces (no tabs)
+- **Semicolons**: Always use semicolons at the end of statements
+- **Trailing Commas**: ES5 style (in objects, arrays, function parameters)
+- **Arrow Function Parens**: Always use parentheses around arrow function parameters
+
+Configuration files:
+- `.prettierrc` - Prettier configuration
+- `.editorconfig` - Editor configuration for consistent settings across IDEs
+
+**Before committing**, run `npm run format` to ensure all code follows the established style.
 
 ## Architecture
 
@@ -78,8 +97,21 @@ src/
 - `@/*` maps to `src/*` (configured in vite.config.ts)
 
 ### Type Definitions
-All backend entity types defined in `src/types/index.ts`:
-- User, LoginCredentials, RegisterData, AuthResponse
-- Exercise, Routine, RoutineExercise, CreateRoutineData
-- WorkoutSession, SessionExercise, CreateSessionData
-- UserMetrics, ApiError
+Types are organized in a modular structure:
+
+**Entity Types** (`src/types/entities/`):
+- `user.ts` - User, UserRole
+- `exercise.ts` - Exercise
+- `routine.ts` - Routine, RoutineExercise
+- `session.ts` - WorkoutSession, SessionExercise
+- `metrics.ts` - UserMetrics
+
+**API Types** (`src/types/api/`):
+- `auth.ts` - Login/Register/Profile request/response types
+- `routines.ts` - Routine CRUD request/response types
+- `exercises.ts` - Exercise CRUD request/response types
+- `sessions.ts` - Session/Progress request/response types
+- `metrics.ts` - Metrics update request/response types
+- `common.ts` - ApiError and common types
+
+Each module exports its types through index files for clean imports.
