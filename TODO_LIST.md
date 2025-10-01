@@ -211,6 +211,10 @@ This document tracks the implementation progress of the Gainz fitness tracking a
 ## 📝 Technical Debt & Improvements
 
 ### Code Quality
+- [x] **Frontend**: Refactor all API calls to use TanStack Query with custom hooks
+  - [x] Migrate login to useMutation hook
+  - [x] Migrate register to useMutation hook
+  - [x] Create custom hooks for all API endpoints (useLogin, useRegister, etc.)
 - [ ] **Frontend**: Add comprehensive unit tests (Jest + React Testing Library)
 - [ ] **Frontend**: Add E2E tests (Playwright or Cypress)
 - [ ] **Frontend**: Improve TypeScript type coverage

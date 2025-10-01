@@ -6,13 +6,11 @@ import { Link,useNavigate } from 'react-router-dom';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { authApi } from '@/lib/api';
-import { useAuthStore } from '@/stores/authStore';
+import { useLogin } from '@/hooks';
 import type { LoginRequest } from '@/types/api';
 
 export function Login() {
   const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth);
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState<LoginRequest>({
@@ -21,7 +19,8 @@ export function Login() {
   });
 
   const [error, setError] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const loginMutation = useLogin();
 
   const onChangeData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,18 +30,13 @@ export function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
 
-    try {
-      const response = await authApi.login(formData);
-      setAuth(response.data.user, response.data.token);
-      navigate('/dashboard', { replace: true });
-    } catch (err) {
-      const error = err as { response?: { data?: { message?: string } } };
-      setError(error.response?.data?.message || t('login.error'));
-    } finally {
-      setLoading(false);
-    }
+    loginMutation.mutate(formData, {
+      onError: (err) => {
+        const error = err as { response?: { data?: { message?: string } } };
+        setError(error.response?.data?.message || t('login.error'));
+      },
+    });
   };
 
   return (
@@ -139,9 +133,9 @@ export function Login() {
             <Button
               type="submit"
               className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all"
-              disabled={loading}
+              disabled={loginMutation.isPending}
             >
-              {loading ? t('login.submitting') : t('login.submit')}
+              {loginMutation.isPending ? t('login.submitting') : t('login.submit')}
             </Button>
           </form>
 

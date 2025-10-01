@@ -9,8 +9,7 @@ import { z } from 'zod';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { authApi } from '@/lib/api';
-import { useAuthStore } from '@/stores/authStore';
+import { useRegister } from '@/hooks';
 
 import registerValidationSchema from './validationsSchema';
 
@@ -28,18 +27,19 @@ type RegisterFormData = z.infer<ReturnType<typeof registerValidationSchema>>;
 
 function Register() {
   const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth);
   const { t } = useTranslation();
   const [responseError, setResponseError] = useState('');
   const [showPasswordValidation, setShowPasswordValidation] = useState(false);
 
   const schema = useMemo(() => registerValidationSchema(t), [t]);
 
+  const registerMutation = useRegister();
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -56,29 +56,27 @@ function Register() {
   const onSubmit = async (data: RegisterFormData) => {
     setResponseError('');
 
-    try {
-      const response = await authApi.register(data);
-      setAuth(response.data.user, response.data.token);
-      navigate('/dashboard', { replace: true });
-    } catch (err) {
-      const error = err as {
-        response?: {
-          data?: {
-            message?: string;
-            details?: Array<{ msg: string }>;
+    registerMutation.mutate(data, {
+      onError: (err) => {
+        const error = err as {
+          response?: {
+            data?: {
+              message?: string;
+              details?: Array<{ msg: string }>;
+            };
           };
         };
-      };
-      const errorMessage =
-        error.response?.data?.message || 'Registration failed. Please try again.';
-      const errorDetails = error.response?.data?.details;
+        const errorMessage =
+          error.response?.data?.message || 'Registration failed. Please try again.';
+        const errorDetails = error.response?.data?.details;
 
-      if (errorDetails && Array.isArray(errorDetails)) {
-        setResponseError(errorDetails.map((d) => d.msg).join(', '));
-      } else {
-        setResponseError(errorMessage || t('register.error'));
-      }
-    }
+        if (errorDetails && Array.isArray(errorDetails)) {
+          setResponseError(errorDetails.map((d) => d.msg).join(', '));
+        } else {
+          setResponseError(errorMessage || t('register.error'));
+        }
+      },
+    });
   };
 
   return (
@@ -286,9 +284,9 @@ function Register() {
             <Button
               type="submit"
               className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all"
-              disabled={isSubmitting}
+              disabled={registerMutation.isPending}
             >
-              {isSubmitting ? t('register.submitting') : t('register.submit')}
+              {registerMutation.isPending ? t('register.submitting') : t('register.submit')}
             </Button>
           </form>
 
