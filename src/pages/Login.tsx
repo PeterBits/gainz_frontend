@@ -1,12 +1,13 @@
+import { ArrowLeft, Dumbbell, Lock,Mail } from 'lucide-react';
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/stores/authStore';
-import { authApi } from '@/lib/api';
-import { Button } from '@/components/ui/button';
+import { Link,useNavigate } from 'react-router-dom';
+
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { Dumbbell, ArrowLeft, Mail, Lock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { authApi } from '@/lib/api';
+import { useAuthStore } from '@/stores/authStore';
 import type { LoginRequest } from '@/types/api';
 
 export function Login() {

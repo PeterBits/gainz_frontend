@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
-import { USFlag } from './flags/USFlag';
+import { useEffect,useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { ESFlag } from './flags/ESFlag';
+import { USFlag } from './flags/USFlag';
 
 const languages = [
   {

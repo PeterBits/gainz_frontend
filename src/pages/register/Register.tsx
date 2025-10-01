@@ -1,16 +1,18 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowLeft, Check, Dumbbell, Lock, Mail, User, UserCircle, X } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { Link, useNavigate } from 'react-router-dom';
+import { z } from 'zod';
+
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/authStore';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { ArrowLeft, Dumbbell, Mail, Lock, User, UserCircle, Check, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import registerValidationSchema from './validationsSchema';
-import { z } from 'zod';
 
 // Helper to check individual password requirements
 const getPasswordValidation = (password: string) => {

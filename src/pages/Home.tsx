@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { Calendar, Dumbbell, TrendingUp, Users, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/button';
-import { Dumbbell, TrendingUp, Users, Calendar, Zap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Button } from '@/components/ui/button';
 
 export function Home() {
   const navigate = useNavigate();

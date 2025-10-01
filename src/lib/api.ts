@@ -1,18 +1,19 @@
 import axios from 'axios';
-import type { User, Routine, Exercise, WorkoutSession, UserMetrics } from '@/types/entities';
+
 import type {
+  CreateRoutineRequest,
+  CreateSessionRequest,
+  GetExerciseProgressParams,
+  GetSessionsParams,
   LoginRequest,
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
-  CreateRoutineRequest,
-  UpdateRoutineRequest,
-  CreateSessionRequest,
-  UpdateSessionRequest,
-  GetSessionsParams,
-  GetExerciseProgressParams,
   UpdateMetricsRequest,
+  UpdateRoutineRequest,
+  UpdateSessionRequest,
 } from '@/types/api';
+import type { Exercise, Routine, User, UserMetrics,WorkoutSession } from '@/types/entities';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 

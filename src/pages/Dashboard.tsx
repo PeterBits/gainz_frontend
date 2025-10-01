@@ -1,19 +1,20 @@
-import { useAuthStore } from '@/stores/authStore';
-import { Button } from '@/components/ui/button';
+import {
+  Activity,
+  Award,
+  Calendar,
+  Dumbbell,
+  LogOut,
+  Target,
+  TrendingUp,
+  User,
+} from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import {
-  Dumbbell,
-  TrendingUp,
-  Calendar,
-  User,
-  LogOut,
-  Activity,
-  Target,
-  Award,
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { useAuthStore } from '@/stores/authStore';
 
 export function Dashboard() {
   const { user, clearAuth } = useAuthStore();
