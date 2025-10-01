@@ -4,6 +4,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { authApi } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Dumbbell, ArrowLeft } from 'lucide-react';
+import type { UserRole } from '@/types/entities';
 
 export function Register() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export function Register() {
     email: '',
     password: '',
     name: '',
-    role: 'ATHLETE' as 'ATHLETE' | 'TRAINER',
+    role: 'ATHLETE' as UserRole,
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);

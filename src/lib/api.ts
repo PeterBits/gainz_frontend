@@ -1,16 +1,18 @@
 import axios from 'axios';
+import type { User, Routine, Exercise, WorkoutSession, UserMetrics } from '@/types/entities';
 import type {
-  AuthResponse,
-  LoginCredentials,
-  RegisterData,
-  User,
-  Routine,
-  CreateRoutineData,
-  Exercise,
-  WorkoutSession,
-  CreateSessionData,
-  UserMetrics,
-} from '@/types';
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+  CreateRoutineRequest,
+  UpdateRoutineRequest,
+  CreateSessionRequest,
+  UpdateSessionRequest,
+  GetSessionsParams,
+  GetExerciseProgressParams,
+  UpdateMetricsRequest,
+} from '@/types/api';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
@@ -56,11 +58,11 @@ api.interceptors.response.use(
 
 // Auth endpoints
 export const authApi = {
-  register: (data: RegisterData) =>
-    api.post<AuthResponse>('/auth/register', data),
+  register: (data: RegisterRequest) =>
+    api.post<RegisterResponse>('/auth/register', data),
 
-  login: (credentials: LoginCredentials) =>
-    api.post<AuthResponse>('/auth/login', credentials),
+  login: (credentials: LoginRequest) =>
+    api.post<LoginResponse>('/auth/login', credentials),
 
   getProfile: () =>
     api.get<User>('/auth/profile'),
@@ -80,10 +82,10 @@ export const routinesApi = {
   getById: (id: number) =>
     api.get<Routine>(`/routines/${id}`),
 
-  create: (data: CreateRoutineData) =>
+  create: (data: CreateRoutineRequest) =>
     api.post<Routine>('/routines', data),
 
-  update: (id: number, data: Partial<CreateRoutineData>) =>
+  update: (id: number, data: UpdateRoutineRequest) =>
     api.put<Routine>(`/routines/${id}`, data),
 
   delete: (id: number) =>
@@ -124,23 +126,16 @@ export const exercisesApi = {
 
 // Progress/Sessions endpoints
 export const progressApi = {
-  getSessions: (params?: {
-    routineId?: number;
-    startDate?: string;
-    endDate?: string;
-    completed?: boolean;
-    limit?: number;
-    offset?: number;
-  }) =>
+  getSessions: (params?: GetSessionsParams) =>
     api.get<WorkoutSession[]>('/progress/sessions', { params }),
 
   getSessionById: (id: number) =>
     api.get<WorkoutSession>(`/progress/sessions/${id}`),
 
-  createSession: (data: CreateSessionData) =>
+  createSession: (data: CreateSessionRequest) =>
     api.post<WorkoutSession>('/progress/sessions', data),
 
-  updateSession: (id: number, data: Partial<CreateSessionData>) =>
+  updateSession: (id: number, data: UpdateSessionRequest) =>
     api.put<WorkoutSession>(`/progress/sessions/${id}`, data),
 
   deleteSession: (id: number) =>
@@ -151,7 +146,7 @@ export const progressApi = {
 
   getExerciseProgress: (
     exerciseId: number,
-    params?: { startDate?: string; endDate?: string; limit?: number }
+    params?: GetExerciseProgressParams
   ) =>
     api.get(`/progress/exercises/${exerciseId}`, { params }),
 };
@@ -161,7 +156,7 @@ export const metricsApi = {
   get: () =>
     api.get<UserMetrics>('/metrics'),
 
-  update: (data: Partial<Omit<UserMetrics, 'id' | 'userId' | 'updatedAt'>>) =>
+  update: (data: UpdateMetricsRequest) =>
     api.put<UserMetrics>('/metrics', data),
 
   delete: () =>
