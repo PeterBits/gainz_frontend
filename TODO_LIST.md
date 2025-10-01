@@ -29,12 +29,12 @@ This document tracks the implementation progress of the Gainz fitness tracking a
 ### Priority 1: Core Workout Features
 
 #### Exercise Management
-- [ ] **Frontend**: Exercise catalog page
-  - [ ] List all available exercises
-  - [ ] Search and filter exercises
-  - [ ] View exercise details (name, description)
-  - [ ] Responsive grid/list view
-  - [ ] Empty state when no exercises
+- [x] **Frontend**: Exercise catalog page
+  - [x] List all available exercises
+  - [x] Search and filter exercises
+  - [x] View exercise details (name, description)
+  - [x] Responsive grid/list view
+  - [x] Empty state when no exercises
 
 #### Routine Management
 - [ ] **Frontend**: Routines list page
