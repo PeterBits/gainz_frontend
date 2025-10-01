@@ -1,11 +1,14 @@
 import { useAuthStore } from '@/stores/authStore';
 import { Button } from '@/components/ui/button';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { Dumbbell, TrendingUp, Calendar, User, LogOut, Activity, Target, Award } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function Dashboard() {
   const { user, clearAuth } = useAuthStore();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     clearAuth();
@@ -15,7 +18,7 @@ export function Dashboard() {
   const stats = [
     {
       icon: <Calendar className="w-6 h-6" />,
-      label: 'Workouts This Week',
+      label: t('dashboard.stats.workoutsThisWeek'),
       value: '0',
       color: 'from-blue-500 to-blue-600',
       bgColor: 'bg-blue-50',
@@ -23,7 +26,7 @@ export function Dashboard() {
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
-      label: 'Active Routines',
+      label: t('dashboard.stats.activeRoutines'),
       value: '0',
       color: 'from-green-500 to-green-600',
       bgColor: 'bg-green-50',
@@ -31,7 +34,7 @@ export function Dashboard() {
     },
     {
       icon: <Activity className="w-6 h-6" />,
-      label: 'Total Exercises',
+      label: t('dashboard.stats.totalExercises'),
       value: '0',
       color: 'from-purple-500 to-purple-600',
       bgColor: 'bg-purple-50',
@@ -40,10 +43,10 @@ export function Dashboard() {
   ];
 
   const quickActions = [
-    { icon: <Dumbbell className="w-5 h-5" />, label: 'Start Workout', color: 'from-blue-500 to-blue-600' },
-    { icon: <Calendar className="w-5 h-5" />, label: 'View Routines', color: 'from-green-500 to-green-600' },
-    { icon: <TrendingUp className="w-5 h-5" />, label: 'Track Progress', color: 'from-purple-500 to-purple-600' },
-    { icon: <Target className="w-5 h-5" />, label: 'Set Goals', color: 'from-orange-500 to-orange-600' },
+    { icon: <Dumbbell className="w-5 h-5" />, label: t('dashboard.quickActions.startWorkout'), color: 'from-blue-500 to-blue-600' },
+    { icon: <Calendar className="w-5 h-5" />, label: t('dashboard.quickActions.viewRoutines'), color: 'from-green-500 to-green-600' },
+    { icon: <TrendingUp className="w-5 h-5" />, label: t('dashboard.quickActions.trackProgress'), color: 'from-purple-500 to-purple-600' },
+    { icon: <Target className="w-5 h-5" />, label: t('dashboard.quickActions.setGoals'), color: 'from-orange-500 to-orange-600' },
   ];
 
   return (
@@ -58,10 +61,11 @@ export function Dashboard() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">Gainz</h1>
-                <p className="text-sm text-slate-600">Welcome back, {user?.name}!</p>
+                <p className="text-sm text-slate-600">{t('dashboard.welcomeBack', { name: user?.name })}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
+              <LanguageSwitcher />
               <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-100">
                 <User className="w-4 h-4 text-blue-600" />
                 <span className="text-sm font-medium text-slate-700">{user?.role}</span>
@@ -73,7 +77,7 @@ export function Dashboard() {
                 className="hover:bg-red-50 hover:text-red-600 hover:border-red-200"
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                Logout
+                {t('common.logout')}
               </Button>
             </div>
           </div>
@@ -106,7 +110,7 @@ export function Dashboard() {
 
           {/* Quick Actions */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-slate-100">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Quick Actions</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-6">{t('dashboard.quickActions.title')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {quickActions.map((action, index) => (
                 <button
@@ -129,17 +133,17 @@ export function Dashboard() {
                 <Dumbbell className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-bold mb-2">Ready to make some gains?</h3>
+                <h3 className="text-2xl font-bold mb-2">{t('dashboard.cta.title')}</h3>
                 <p className="text-blue-100 mb-4">
                   {user?.role === 'TRAINER'
-                    ? 'Create custom routines for your athletes and track their progress.'
-                    : 'Start logging your workouts and watch your progress grow!'}
+                    ? t('dashboard.cta.subtitleTrainer')
+                    : t('dashboard.cta.subtitleAthlete')}
                 </p>
                 <Button
                   variant="secondary"
                   className="bg-white text-blue-600 hover:bg-blue-50"
                 >
-                  {user?.role === 'TRAINER' ? 'Create Routine' : 'Start First Workout'}
+                  {user?.role === 'TRAINER' ? t('dashboard.cta.buttonTrainer') : t('dashboard.cta.buttonAthlete')}
                 </Button>
               </div>
             </div>
@@ -147,13 +151,13 @@ export function Dashboard() {
 
           {/* Recent Activity (Placeholder) */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-slate-100">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Recent Activity</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-6">{t('dashboard.recentActivity.title')}</h2>
             <div className="text-center py-12">
               <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Activity className="w-8 h-8 text-slate-400" />
               </div>
-              <p className="text-slate-500 mb-2">No activity yet</p>
-              <p className="text-sm text-slate-400">Start your first workout to see it here</p>
+              <p className="text-slate-500 mb-2">{t('dashboard.recentActivity.noActivity')}</p>
+              <p className="text-sm text-slate-400">{t('dashboard.recentActivity.noActivityHint')}</p>
             </div>
           </div>
         </div>

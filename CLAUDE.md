@@ -97,6 +97,7 @@ Configuration files:
   - TanStack Query (server state)
 - **Forms**: React Hook Form + Zod validation
 - **HTTP Client**: Axios with interceptors
+- **Internationalization**: react-i18next with browser language detection
 - **PWA**: vite-plugin-pwa with Workbox
 
 ### Project Structure
@@ -104,13 +105,22 @@ Configuration files:
 src/
 ├── components/       # React components
 │   ├── auth/        # Authentication components (ProtectedRoute)
-│   └── ui/          # Reusable UI components (shadcn/ui style)
+│   ├── ui/          # Reusable UI components (shadcn/ui style)
+│   └── LanguageSwitcher.tsx  # Language toggle component
 ├── lib/             # Utilities and API client
 │   ├── api.ts       # Axios instance + API endpoints
 │   └── utils.ts     # Utility functions (cn helper)
-├── pages/           # Route pages (Home, Login)
+├── locales/         # Translation files
+│   ├── en/          # English translations
+│   │   └── translation.json
+│   └── es/          # Spanish translations
+│       └── translation.json
+├── pages/           # Route pages (Home, Login, Register, Dashboard)
 ├── stores/          # Zustand stores (authStore with persist)
 ├── types/           # TypeScript type definitions
+│   ├── entities/    # Domain models
+│   └── api/         # API request/response types
+├── i18n.ts          # i18next configuration
 └── main.tsx         # Application entry point
 ```
 
@@ -136,6 +146,30 @@ src/
 **User Roles**:
 - `ATHLETE`: Can track workouts, view assigned routines from trainers
 - `TRAINER`: Can create routines, assign to athletes, view athlete progress
+
+**Internationalization (i18n)**:
+- Built with `react-i18next` and `i18next-browser-languagedetector`
+- Supports English (`en`) and Spanish (`es`)
+- Automatic browser language detection with fallback to Spanish
+- Translations stored in JSON files at `src/locales/{lang}/translation.json`
+- Use the `useTranslation()` hook in components:
+  ```tsx
+  import { useTranslation } from 'react-i18next';
+
+  function MyComponent() {
+    const { t, i18n } = useTranslation();
+
+    return (
+      <div>
+        <h1>{t('home.title')}</h1>
+        <p>{t('dashboard.welcomeBack', { name: user?.name })}</p>
+        <button onClick={() => i18n.changeLanguage('es')}>Español</button>
+      </div>
+    );
+  }
+  ```
+- `LanguageSwitcher` component provides a toggle between languages
+- When adding new text, **always** add translations to both `en` and `es` translation files
 
 **PWA Configuration**:
 - Auto-update service worker registration

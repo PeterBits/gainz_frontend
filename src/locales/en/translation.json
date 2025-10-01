@@ -1,0 +1,91 @@
+{
+  "common": {
+    "back": "Back",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "error": "Error"
+  },
+  "home": {
+    "title": "Gainz",
+    "subtitle": "Your personal fitness companion. Track workouts, monitor progress, and achieve your goals.",
+    "getStarted": "Get Started Free",
+    "signIn": "Sign In",
+    "features": {
+      "trackWorkouts": {
+        "title": "Track Workouts",
+        "description": "Log your exercises, sets, reps, and weights with ease"
+      },
+      "monitorProgress": {
+        "title": "Monitor Progress",
+        "description": "Visualize your strength gains and track your fitness journey"
+      },
+      "trainerMode": {
+        "title": "Trainer Mode",
+        "description": "Create and assign routines to your athletes"
+      },
+      "customRoutines": {
+        "title": "Custom Routines",
+        "description": "Build personalized workout plans that fit your goals"
+      }
+    },
+    "cta": {
+      "title": "Ready to start your journey?",
+      "subtitle": "Join thousands of athletes and trainers already using Gainz",
+      "button": "Create Free Account"
+    }
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to continue your fitness journey",
+    "email": "Email address",
+    "password": "Password",
+    "submit": "Sign In",
+    "submitting": "Signing in...",
+    "newToGainz": "New to Gainz?",
+    "createAccount": "Create a free account",
+    "error": "Login failed. Please try again."
+  },
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Start tracking your fitness journey today",
+    "name": "Full name",
+    "email": "Email address",
+    "password": "Password",
+    "passwordHint": "Must be at least 6 characters",
+    "role": "I am a...",
+    "roleAthlete": "Athlete - Track my own workouts",
+    "roleTrainer": "Trainer - Create routines for athletes",
+    "submit": "Create Account",
+    "submitting": "Creating account...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInInstead": "Sign in instead",
+    "error": "Registration failed. Please try again."
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back, {{name}}!",
+    "stats": {
+      "workoutsThisWeek": "Workouts This Week",
+      "activeRoutines": "Active Routines",
+      "totalExercises": "Total Exercises"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "startWorkout": "Start Workout",
+      "viewRoutines": "View Routines",
+      "trackProgress": "Track Progress",
+      "setGoals": "Set Goals"
+    },
+    "cta": {
+      "title": "Ready to make some gains?",
+      "subtitleTrainer": "Create custom routines for your athletes and track their progress.",
+      "subtitleAthlete": "Start logging your workouts and watch your progress grow!",
+      "buttonTrainer": "Create Routine",
+      "buttonAthlete": "Start First Workout"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "noActivity": "No activity yet",
+      "noActivityHint": "Start your first workout to see it here"
+    }
+  }
+}

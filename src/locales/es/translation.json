@@ -1,0 +1,91 @@
+{
+  "common": {
+    "back": "Atrás",
+    "logout": "Cerrar sesión",
+    "loading": "Cargando...",
+    "error": "Error"
+  },
+  "home": {
+    "title": "Gainz",
+    "subtitle": "Tu compañero personal de fitness. Registra entrenamientos, monitorea tu progreso y alcanza tus objetivos.",
+    "getStarted": "Comienza Gratis",
+    "signIn": "Iniciar Sesión",
+    "features": {
+      "trackWorkouts": {
+        "title": "Registra Entrenamientos",
+        "description": "Registra tus ejercicios, series, repeticiones y pesos con facilidad"
+      },
+      "monitorProgress": {
+        "title": "Monitorea tu Progreso",
+        "description": "Visualiza tus ganancias de fuerza y sigue tu viaje fitness"
+      },
+      "trainerMode": {
+        "title": "Modo Entrenador",
+        "description": "Crea y asigna rutinas a tus atletas"
+      },
+      "customRoutines": {
+        "title": "Rutinas Personalizadas",
+        "description": "Construye planes de entrenamiento personalizados que se ajusten a tus objetivos"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para comenzar tu viaje?",
+      "subtitle": "Únete a miles de atletas y entrenadores que ya usan Gainz",
+      "button": "Crear Cuenta Gratis"
+    }
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Inicia sesión para continuar tu viaje fitness",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar Sesión",
+    "submitting": "Iniciando sesión...",
+    "newToGainz": "¿Nuevo en Gainz?",
+    "createAccount": "Crear una cuenta gratis",
+    "error": "Error al iniciar sesión. Por favor, intenta de nuevo."
+  },
+  "register": {
+    "title": "Crea tu cuenta",
+    "subtitle": "Comienza a registrar tu viaje fitness hoy",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "passwordHint": "Debe tener al menos 6 caracteres",
+    "role": "Soy...",
+    "roleAthlete": "Atleta - Registrar mis propios entrenamientos",
+    "roleTrainer": "Entrenador - Crear rutinas para atletas",
+    "submit": "Crear Cuenta",
+    "submitting": "Creando cuenta...",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signInInstead": "Inicia sesión",
+    "error": "Error al registrarse. Por favor, intenta de nuevo."
+  },
+  "dashboard": {
+    "welcomeBack": "¡Bienvenido de nuevo, {{name}}!",
+    "stats": {
+      "workoutsThisWeek": "Entrenamientos Esta Semana",
+      "activeRoutines": "Rutinas Activas",
+      "totalExercises": "Ejercicios Totales"
+    },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "startWorkout": "Comenzar Entrenamiento",
+      "viewRoutines": "Ver Rutinas",
+      "trackProgress": "Seguir Progreso",
+      "setGoals": "Establecer Objetivos"
+    },
+    "cta": {
+      "title": "¿Listo para hacer ganancias?",
+      "subtitleTrainer": "Crea rutinas personalizadas para tus atletas y rastrea su progreso.",
+      "subtitleAthlete": "¡Comienza a registrar tus entrenamientos y observa cómo crece tu progreso!",
+      "buttonTrainer": "Crear Rutina",
+      "buttonAthlete": "Comenzar Primer Entrenamiento"
+    },
+    "recentActivity": {
+      "title": "Actividad Reciente",
+      "noActivity": "Aún no hay actividad",
+      "noActivityHint": "Comienza tu primer entrenamiento para verlo aquí"
+    }
+  }
+}

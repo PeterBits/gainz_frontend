@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/stores/authStore';
 import { authApi } from '@/lib/api';
 import { Button } from '@/components/ui/button';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { Dumbbell, ArrowLeft, Mail, Lock } from 'lucide-react';
 import type { LoginRequest } from '@/types/api';
 
 export function Login() {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState<LoginRequest>({
     email: '',
@@ -34,7 +37,7 @@ export function Login() {
       navigate('/dashboard', { replace: true });
     } catch (err) {
       const error = err as { response?: { data?: { message?: string } } };
-      setError(error.response?.data?.message || 'Login failed. Please try again.');
+      setError(error.response?.data?.message || t('login.error'));
     } finally {
       setLoading(false);
     }
@@ -43,6 +46,11 @@ export function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
+        {/* Language Switcher */}
+        <div className="flex justify-end mb-4">
+          <LanguageSwitcher />
+        </div>
+
         {/* Back Button */}
         <Button
           variant="ghost"
@@ -50,7 +58,7 @@ export function Login() {
           className="mb-6 hover:bg-white/50"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
+          {t('common.back')}
         </Button>
 
         {/* Card */}
@@ -64,8 +72,8 @@ export function Login() {
 
           {/* Title */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome back</h1>
-            <p className="text-slate-600">Sign in to continue your fitness journey</p>
+            <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('login.title')}</h1>
+            <p className="text-slate-600">{t('login.subtitle')}</p>
           </div>
 
           {/* Error Message */}
@@ -80,7 +88,7 @@ export function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-                Email address
+                {t('login.email')}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -99,7 +107,7 @@ export function Login() {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
-                Password
+                {t('login.password')}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -122,7 +130,7 @@ export function Login() {
               className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all"
               disabled={loading}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? t('login.submitting') : t('login.submit')}
             </Button>
           </form>
 
@@ -132,7 +140,7 @@ export function Login() {
               <div className="w-full border-t border-slate-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-slate-500">New to Gainz?</span>
+              <span className="px-2 bg-white text-slate-500">{t('login.newToGainz')}</span>
             </div>
           </div>
 
@@ -142,7 +150,7 @@ export function Login() {
               to="/register"
               className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
             >
-              Create a free account
+              {t('login.createAccount')}
             </Link>
           </div>
         </div>
