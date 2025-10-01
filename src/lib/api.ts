@@ -4,6 +4,7 @@ import type {
   CreateRoutineRequest,
   CreateSessionRequest,
   GetExerciseProgressParams,
+  GetExercisesResponse,
   GetSessionsParams,
   LoginRequest,
   LoginResponse,
@@ -13,7 +14,7 @@ import type {
   UpdateRoutineRequest,
   UpdateSessionRequest,
 } from '@/types/api';
-import type { Exercise, Routine, User, UserMetrics,WorkoutSession } from '@/types/entities';
+import type { Exercise, Routine, User, UserMetrics, WorkoutSession } from '@/types/entities';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
@@ -101,7 +102,7 @@ export const routinesApi = {
 
 // Exercises endpoints
 export const exercisesApi = {
-  getAll: () => api.get<Exercise[]>('/exercises'),
+  getAll: () => api.get<GetExercisesResponse>('/exercises'),
 
   getById: (id: number) => api.get<Exercise>(`/exercises/${id}`),
 

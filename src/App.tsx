@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate,Route, Routes } from 'react-router-dom';
 
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { Dashboard } from '@/pages/Dashboard';
+import { Exercises } from '@/pages/Exercises';
 import { Home } from '@/pages/Home';
 import { Login } from '@/pages/Login';
 import { Register } from '@/pages/register';
@@ -49,6 +50,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exercises"
+            element={
+              <ProtectedRoute>
+                <Exercises />
               </ProtectedRoute>
             }
           />

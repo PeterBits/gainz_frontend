@@ -58,21 +58,25 @@ export function Dashboard() {
       icon: <Dumbbell className="w-5 h-5" />,
       label: t('dashboard.quickActions.startWorkout'),
       color: 'from-blue-500 to-blue-600',
+      onClick: () => navigate('/exercises'),
     },
     {
       icon: <Calendar className="w-5 h-5" />,
       label: t('dashboard.quickActions.viewRoutines'),
       color: 'from-green-500 to-green-600',
+      onClick: () => {},
     },
     {
       icon: <TrendingUp className="w-5 h-5" />,
       label: t('dashboard.quickActions.trackProgress'),
       color: 'from-purple-500 to-purple-600',
+      onClick: () => {},
     },
     {
       icon: <Target className="w-5 h-5" />,
       label: t('dashboard.quickActions.setGoals'),
       color: 'from-orange-500 to-orange-600',
+      onClick: () => {},
     },
   ];
 
@@ -153,6 +157,7 @@ export function Dashboard() {
               {quickActions.map((action, index) => (
                 <button
                   key={index}
+                  onClick={action.onClick}
                   className="group relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-600 hover:from-white hover:to-slate-50 dark:hover:from-slate-600 dark:hover:to-slate-500 border border-slate-200 dark:border-slate-600 rounded-xl p-6 transition-all hover:shadow-md hover:scale-105 active:scale-95"
                 >
                   <div

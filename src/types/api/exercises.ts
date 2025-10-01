@@ -1,7 +1,7 @@
 import type { Exercise } from '../entities/exercise';
 
 // Get All Exercises
-export type GetExercisesResponse = Exercise[];
+export type GetExercisesResponse = { count: number; success: boolean; data: Exercise[] };
 
 // Get Exercise by ID
 export type GetExerciseResponse = Exercise;

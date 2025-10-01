@@ -3,7 +3,8 @@
     "back": "Atrás",
     "logout": "Cerrar sesión",
     "loading": "Cargando...",
-    "error": "Error"
+    "error": "Error",
+    "welcome": "Bienvenido"
   },
   "home": {
     "title": "Gainz",
@@ -105,5 +106,17 @@
       "noActivity": "Aún no hay actividad",
       "noActivityHint": "Comienza tu primer entrenamiento para verlo aquí"
     }
+  },
+  "exercises": {
+    "title": "Catálogo de Ejercicios",
+    "subtitle": "Explora todos los ejercicios disponibles para tus entrenamientos",
+    "searchPlaceholder": "Buscar ejercicios por nombre o descripción...",
+    "noExercises": "No hay ejercicios disponibles",
+    "noExercisesDescription": "Aún no hay ejercicios en el catálogo.",
+    "noResults": "No se encontraron ejercicios",
+    "noResultsDescription": "Intenta ajustar tu término de búsqueda.",
+    "errorLoading": "Error al cargar ejercicios",
+    "errorLoadingDescription": "Hubo un problema al cargar los ejercicios. Por favor, intenta de nuevo.",
+    "showing": "Mostrando {{count}} ejercicio(s)"
   }
 }
