@@ -37,6 +37,55 @@ Configuration files:
 
 **Before committing**, run `npm run format` to ensure all code follows the established style.
 
+## Design & UI Guidelines
+
+**CRITICAL**: All UI components and pages must be designed with these principles:
+
+### Responsive Design (Mobile-First)
+- **Always** build responsive layouts that work on mobile, tablet, and desktop
+- Use Tailwind breakpoints: `sm:` (640px), `md:` (768px), `lg:` (1024px), `xl:` (1280px)
+- Start with mobile layout, then enhance for larger screens
+- Test on multiple screen sizes: mobile (375px), tablet (768px), desktop (1440px)
+- Ensure touch targets are at least 44x44px on mobile
+
+### Visual Design System
+- **Colors**: Use gradient theme blue-600 → purple-600 for primary actions
+- **Spacing**: Consistent padding and margins (4, 6, 8, 12, 16, 24)
+- **Border Radius**:
+  - `rounded-2xl` for cards and major containers
+  - `rounded-xl` for buttons and inputs
+  - `rounded-lg` for smaller components
+- **Shadows**: Layered depth with `shadow-md`, `shadow-lg`, `shadow-xl`
+- **Typography**: Clear hierarchy with bold headings, readable body text
+
+### Interactive Elements
+- **Buttons**: Must have hover, active, and disabled states
+- **Inputs**: Visual feedback on focus (`focus:ring-2`, `focus:border-*`)
+- **Cards**: Hover effects with shadow and scale transitions
+- **Transitions**: Smooth animations with `transition-all` or `transition-transform`
+
+### Component Patterns
+- **Forms**: Icon-enhanced inputs with clear labels and error states
+- **Cards**: White background with border, rounded-2xl, shadow-md
+- **CTAs**: Gradient backgrounds with prominent placement
+- **Empty States**: Centered icon, message, and action button
+- **Loading States**: Clear feedback during async operations
+
+### Icons
+- Use Lucide React icons consistently throughout the app
+- Icon size: `w-4 h-4` (small), `w-5 h-5` (medium), `w-6 h-6` (large)
+- Always include semantic meaning with icons + text
+
+**Example of good responsive card:**
+```tsx
+<div className="bg-white rounded-2xl p-6 md:p-8 shadow-md hover:shadow-lg transition-all border border-slate-100">
+  <h2 className="text-xl md:text-2xl font-bold mb-4">Title</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {/* Content */}
+  </div>
+</div>
+```
+
 ## Architecture
 
 ### Tech Stack
