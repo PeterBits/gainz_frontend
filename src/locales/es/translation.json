@@ -6,6 +6,10 @@
     "error": "Error",
     "welcome": "Bienvenido"
   },
+  "navigation": {
+    "dashboard": "Inicio",
+    "exercises": "Ejercicios"
+  },
   "home": {
     "title": "Gainz",
     "subtitle": "Tu compañero personal de fitness. Registra entrenamientos, monitorea tu progreso y alcanza tus objetivos.",

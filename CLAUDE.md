@@ -32,6 +32,7 @@ npm run format:check     # Check code formatting
 - **Arrow Function Parens**: Always use parentheses around arrow function parameters
 
 Configuration files:
+
 - `.prettierrc` - Prettier configuration
 - `.editorconfig` - Editor configuration for consistent settings across IDEs
 
@@ -42,6 +43,7 @@ Configuration files:
 **CRITICAL**: All UI components and pages must be designed with these principles:
 
 ### Responsive Design (Mobile-First)
+
 - **Always** build responsive layouts that work on mobile, tablet, and desktop
 - Use Tailwind breakpoints: `sm:` (640px), `md:` (768px), `lg:` (1024px), `xl:` (1280px)
 - Start with mobile layout, then enhance for larger screens
@@ -49,6 +51,7 @@ Configuration files:
 - Ensure touch targets are at least 44x44px on mobile
 
 ### Visual Design System
+
 - **Colors**: Use gradient theme blue-600 → purple-600 for primary actions
 - **Spacing**: Consistent padding and margins (4, 6, 8, 12, 16, 24)
 - **Border Radius**:
@@ -59,12 +62,14 @@ Configuration files:
 - **Typography**: Clear hierarchy with bold headings, readable body text
 
 ### Interactive Elements
+
 - **Buttons**: Must have hover, active, and disabled states
 - **Inputs**: Visual feedback on focus (`focus:ring-2`, `focus:border-*`)
 - **Cards**: Hover effects with shadow and scale transitions
 - **Transitions**: Smooth animations with `transition-all` or `transition-transform`
 
 ### Component Patterns
+
 - **Forms**: Icon-enhanced inputs with clear labels and error states
 - **Cards**: White background with border, rounded-2xl, shadow-md
 - **CTAs**: Gradient backgrounds with prominent placement
@@ -72,11 +77,13 @@ Configuration files:
 - **Loading States**: Clear feedback during async operations
 
 ### Icons
+
 - Use Lucide React icons consistently throughout the app
 - Icon size: `w-4 h-4` (small), `w-5 h-5` (medium), `w-6 h-6` (large)
 - Always include semantic meaning with icons + text
 
 **Example of good responsive card:**
+
 ```tsx
 <div className="bg-white rounded-2xl p-6 md:p-8 shadow-md hover:shadow-lg transition-all border border-slate-100">
   <h2 className="text-xl md:text-2xl font-bold mb-4">Title</h2>
@@ -89,6 +96,7 @@ Configuration files:
 ## Architecture
 
 ### Tech Stack
+
 - **Frontend**: React 19 + TypeScript, Vite
 - **Styling**: TailwindCSS v4 with class-variance-authority (CVA) and dark mode
 - **Routing**: React Router v7
@@ -101,6 +109,7 @@ Configuration files:
 - **PWA**: vite-plugin-pwa with Workbox
 
 ### Project Structure
+
 ```
 src/
 ├── components/       # React components
@@ -127,27 +136,32 @@ src/
 ### Key Patterns
 
 **Authentication Flow**:
+
 - JWT token stored in localStorage via Zustand persist middleware
 - `authStore.ts` manages user/token/isAuthenticated state
 - Axios interceptors auto-inject Bearer token and handle 401 responses
 - `ProtectedRoute` component guards authenticated routes
 
 **API Architecture** (`src/lib/api.ts`):
+
 - Base Axios instance with auto-token injection
 - API organized by domain: `authApi`, `routinesApi`, `exercisesApi`, `progressApi`, `metricsApi`
 - Backend API expected at `http://localhost:4000` (configurable via `VITE_API_URL`)
 - Vite dev server proxies `/api` requests to backend
 
 **State Management**:
+
 - **Local state**: React `useState` for UI state
 - **Form state**: React Hook Form with Zod validation
 - **Auth state**: Zustand with localStorage persistence
 - **Server state**: TanStack Query for API data (retry: 1, no window refocus)
 
 **Form Validation**:
+
 - Use **React Hook Form** + **Zod** for all forms
 - Create Zod schemas with translated error messages using `useTranslation()`
 - Use `useMemo` to create schemas inside components for i18n support:
+
   ```tsx
   import { useForm } from 'react-hook-form';
   import { zodResolver } from '@hookform/resolvers/zod';
@@ -175,6 +189,7 @@ src/
     );
   }
   ```
+
 - **Always** add error messages to translation files (EN/ES)
 - Use red borders and error text below fields for validation feedback
 - Backend validation requirements (for password):
@@ -184,15 +199,19 @@ src/
   - At least one number (0-9)
 
 **User Roles**:
+
 - `ATHLETE`: Can track workouts, view assigned routines from trainers
 - `TRAINER`: Can create routines, assign to athletes, view athlete progress
 
 **Internationalization (i18n)**:
+
 - Built with `react-i18next` and `i18next-browser-languagedetector`
 - Supports English (`en`) and Spanish (`es`)
 - Automatic browser language detection with fallback to Spanish
 - Translations stored in JSON files at `src/locales/{lang}/translation.json`
+- Available translation namespaces: `common`, `navigation`, `home`, `login`, `register`, `dashboard`, `exercises`
 - Use the `useTranslation()` hook in components:
+
   ```tsx
   import { useTranslation } from 'react-i18next';
 
@@ -208,24 +227,31 @@ src/
     );
   }
   ```
+
 - `LanguageSwitcher` component provides a toggle between languages
 - When adding new text, **always** add translations to both `en` and `es` translation files
 
 **Dark Mode**:
+
 - Implemented with Tailwind CSS v4 dark mode using custom `@variant` directive
 - Theme state managed with Zustand and persisted to localStorage
 - `ThemeToggle` component provides a toggle between light and dark modes
 - Theme is initialized on app load and applied to the `<html>` element
 - Dark mode configured in `src/index.css` with:
+
   ```css
   @variant dark (&:where(.dark, .dark *));
+
   ```
+
 - Use Tailwind dark mode variants for styling:
+
   ```tsx
   <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
     <p className="text-slate-600 dark:text-slate-300">Content</p>
   </div>
   ```
+
 - **Always** add dark mode variants when styling components
 - Common dark mode patterns:
   - Backgrounds: `bg-white dark:bg-slate-800`
@@ -235,17 +261,21 @@ src/
   - Gradients: `from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-800`
 
 **PWA Configuration**:
+
 - Auto-update service worker registration
 - API responses cached with NetworkFirst strategy (24hr expiry)
 - Static assets cached for offline support
 
 ### Path Alias
+
 - `@/*` maps to `src/*` (configured in vite.config.ts)
 
 ### Type Definitions
+
 Types are organized in a modular structure:
 
 **Entity Types** (`src/types/entities/`):
+
 - `user.ts` - User, UserRole
 - `exercise.ts` - Exercise
 - `routine.ts` - Routine, RoutineExercise
@@ -253,6 +283,7 @@ Types are organized in a modular structure:
 - `metrics.ts` - UserMetrics
 
 **API Types** (`src/types/api/`):
+
 - `auth.ts` - Login/Register/Profile request/response types
 - `routines.ts` - Routine CRUD request/response types
 - `exercises.ts` - Exercise CRUD request/response types

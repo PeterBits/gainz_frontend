@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
-import { useExercises } from '@/hooks';
+import { useExercises, useIsMobile } from '@/hooks';
 
 export function Exercises() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
+  const isMobile = useIsMobile();
 
   const { data: exercises, isLoading, isError } = useExercises();
 
@@ -28,7 +29,7 @@ export function Exercises() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className={`container mx-auto px-4 py-8 ${isMobile ? 'pb-24' : ''}`}>
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <div className="mb-8">

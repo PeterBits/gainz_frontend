@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks';
 import { useAuthStore } from '@/stores/authStore';
 
 export function Dashboard() {
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
 
   const stats = [
     {
@@ -67,7 +69,7 @@ export function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className={`container mx-auto px-4 py-8 ${isMobile ? 'pb-24' : ''}`}>
         <div className="max-w-6xl mx-auto space-y-8">
           {/* Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

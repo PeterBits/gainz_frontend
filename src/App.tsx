@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Navigate,Route, Routes } from 'react-router-dom';
 
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
+import { BottomNav } from '@/components/BottomNav';
 import { Header } from '@/components/Header';
 import { Dashboard } from '@/pages/Dashboard';
 import { Exercises } from '@/pages/Exercises';
@@ -67,6 +68,7 @@ function App() {
           {/* Catch all */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        <BottomNav />
       </BrowserRouter>
     </QueryClientProvider>
   );
