@@ -5,7 +5,7 @@ import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/authStore';
 import type { RegisterRequest } from '@/types/api';
 
-export const useRegister = () => {
+const useRegister = () => {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
 
@@ -17,3 +17,4 @@ export const useRegister = () => {
     },
   });
 };
+export default useRegister;

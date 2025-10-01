@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { BrowserRouter, Navigate,Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { BottomNav } from '@/components/BottomNav';
@@ -8,7 +8,7 @@ import { Header } from '@/components/Header';
 import { Dashboard } from '@/pages/Dashboard';
 import { Exercises } from '@/pages/Exercises';
 import { Home } from '@/pages/Home';
-import { Login } from '@/pages/Login';
+import { Login } from '@/pages/login';
 import { Register } from '@/pages/register';
 import { useAuthStore } from '@/stores/authStore';
 import { useThemeStore } from '@/stores/themeStore';

@@ -1,15 +1,16 @@
-import { ArrowLeft, Dumbbell, Lock,Mail } from 'lucide-react';
+import { ArrowLeft, Dumbbell, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { useLogin } from '@/hooks';
 import type { LoginRequest } from '@/types/api';
 
-export function Login() {
+import useLogin from './hooks/useLogin';
+
+function Login() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -165,3 +166,4 @@ export function Login() {
     </div>
   );
 }
+export default Login;

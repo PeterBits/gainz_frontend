@@ -9,8 +9,8 @@ import { z } from 'zod';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { useRegister } from '@/hooks';
 
+import { useRegister } from './hooks';
 import registerValidationSchema from './validationsSchema';
 
 // Helper to check individual password requirements

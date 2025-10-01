@@ -108,29 +108,119 @@ Configuration files:
 - **Internationalization**: react-i18next with browser language detection
 - **PWA**: vite-plugin-pwa with Workbox
 
-### Project Structure
+### Project Structure & Modular Architecture
+
+**CRITICAL**: This project follows a **modular, colocation architecture**. Components, hooks, utilities, or any code used **only** in a single page must be colocated within that page's directory. Only place code in shared directories (`src/components/`, `src/hooks/`) when it's used in **multiple pages**.
 
 ```
 src/
-├── components/       # React components
+├── components/       # Shared components (used in multiple pages ONLY)
 │   ├── auth/        # Authentication components (ProtectedRoute)
 │   ├── ui/          # Reusable UI components (shadcn/ui style)
-│   └── LanguageSwitcher.tsx  # Language toggle component
+│   ├── BottomNav.tsx # Mobile navigation
+│   ├── Header.tsx   # Global header
+│   ├── LanguageSwitcher.tsx  # Language toggle
+│   └── ThemeToggle.tsx # Dark mode toggle
+├── hooks/           # Shared hooks (used in multiple pages ONLY)
+│   ├── useExercises.ts # Fetch exercises (used in multiple pages)
+│   └── useIsMobile.ts  # Mobile detection (used in multiple pages)
 ├── lib/             # Utilities and API client
 │   ├── api.ts       # Axios instance + API endpoints
 │   └── utils.ts     # Utility functions (cn helper)
 ├── locales/         # Translation files
-│   ├── en/          # English translations
-│   │   └── translation.json
-│   └── es/          # Spanish translations
-│       └── translation.json
-├── pages/           # Route pages (Home, Login, Register, Dashboard)
-├── stores/          # Zustand stores (authStore, themeStore with persist)
+│   ├── en/translation.json
+│   └── es/translation.json
+├── pages/           # Route pages with page-specific code
+│   ├── login/       # Login page module
+│   │   ├── hooks/   # Login-specific hooks
+│   │   │   └── useLogin.ts
+│   │   ├── Login.tsx
+│   │   └── index.tsx # Export: export { default as Login } from './Login'
+│   ├── register/    # Register page module
+│   │   ├── hooks/   # Register-specific hooks
+│   │   │   └── useRegister.ts
+│   │   ├── Register.tsx
+│   │   ├── validationsSchema.ts # Register-specific validation
+│   │   └── index.tsx # Export: export { default as Register } from './Register'
+│   ├── Dashboard.tsx
+│   ├── Exercises.tsx
+│   └── Home.tsx
+├── stores/          # Zustand stores (authStore, themeStore)
 ├── types/           # TypeScript type definitions
 │   ├── entities/    # Domain models
 │   └── api/         # API request/response types
 ├── i18n.ts          # i18next configuration
 └── main.tsx         # Application entry point
+```
+
+### Modular Architecture Principles
+
+**1. Page-Specific Code Colocation**
+
+Keep components, hooks, utilities, or any code used **only** in a single page inside that page's directory:
+
+```
+✅ src/pages/login/hooks/useLogin.ts     # Only used in Login
+✅ src/pages/register/hooks/useRegister.ts # Only used in Register
+✅ src/pages/register/validationsSchema.ts # Only used in Register
+```
+
+**2. Shared Code in Common Directories**
+
+Only place code in shared directories when it's used in **multiple pages**:
+
+```
+✅ src/hooks/useIsMobile.ts    # Used in Dashboard, Exercises, BottomNav
+✅ src/components/Header.tsx   # Used across multiple pages
+```
+
+**3. Index Files for Clean Imports**
+
+**IMPORTANT**: Every page directory **must** have an `index.tsx` file that exports the page component:
+
+```tsx
+// src/pages/login/index.tsx
+export { default as Login } from './Login';
+
+// src/pages/register/index.tsx
+export { default as Register } from './Register';
+```
+
+This allows clean imports in `App.tsx`:
+```tsx
+import { Login } from '@/pages/login';
+import { Register } from '@/pages/register';
+```
+
+**4. Benefits of This Architecture**
+
+- **Better organization**: Related code stays together
+- **Easier refactoring**: Clear boundaries between features
+- **Reduced coupling**: Page changes don't affect other pages
+- **Clearer intent**: Instantly see if code is shared or page-specific
+- **Scalability**: Easy to find and maintain code as app grows
+
+**5. When to Move Code**
+
+- **Start**: Place new code in the page directory
+- **Second use**: Move to shared directory when a second page needs it
+- **Cleanup**: If shared code is only used by one page, move it back
+
+**6. Example Structure for New Page**
+
+When creating a new page (e.g., "Profile"), follow this structure:
+
+```
+src/pages/profile/
+├── components/        # Profile-specific components
+│   ├── ProfileForm.tsx
+│   └── AvatarUpload.tsx
+├── hooks/            # Profile-specific hooks
+│   └── useUpdateProfile.ts
+├── utils/            # Profile-specific utilities
+│   └── validation.ts
+├── Profile.tsx       # Main page component
+└── index.tsx         # Export: export { default as Profile } from './Profile'
 ```
 
 ### Key Patterns

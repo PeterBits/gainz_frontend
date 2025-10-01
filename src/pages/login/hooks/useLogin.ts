@@ -5,7 +5,7 @@ import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/authStore';
 import type { LoginRequest } from '@/types/api';
 
-export const useLogin = () => {
+const useLogin = () => {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
 
@@ -17,3 +17,4 @@ export const useLogin = () => {
     },
   });
 };
+export default useLogin;
